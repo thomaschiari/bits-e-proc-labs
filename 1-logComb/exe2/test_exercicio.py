@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from myhdl import *
-from exercicio import *
+from componente import *
 
 vec = [
     "0001",

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-""" Exercice 3
+"""
+Exercice 3
 
 Implemente o circuito lógico a seguir:
 
