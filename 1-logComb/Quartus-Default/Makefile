@@ -11,7 +11,7 @@ ASSIGNMENT_FILES = $(PROJECT).qpf $(PROJECT).qsf
 
 FAMILY = "Cyclone V"
 PART = 5CEBA4F23C7
-BOARDFILE = DE0_CV_Default.qsf
+BOARDFILE = pins.qsf
 
 ###################################################################
 
