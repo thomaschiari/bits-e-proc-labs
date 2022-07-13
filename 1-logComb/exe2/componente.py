@@ -25,6 +25,6 @@ from myhdl import *
 def equacao(q, a, b, c):
     @always_comb
     def comb():
-        q.next = (b and c) or (not b and not c)
+        pass
 
     return instances()

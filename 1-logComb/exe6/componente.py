@@ -18,7 +18,6 @@ from myhdl import *
 def componente(hex0, sw):
     @always_comb
     def comb():
-        for i in range(len(hex0)):
-            hex0[i].next = sw[i]
+        pass
 
     return instances()

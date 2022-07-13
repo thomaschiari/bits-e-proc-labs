@@ -14,6 +14,6 @@ from myhdl import *
 def equacao(q, a, b):
     @always_comb
     def comb():
-        q.next = a or not b
+        pass
 
     return instances()
