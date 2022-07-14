@@ -17,8 +17,8 @@ BOARDFILE = pins.qsf
 
 ###################################################################
 # Setup your sources here
-SRCS =  $(wildcard $(VHDL)/*.vhdl) \
-        $(wildcard $(VHDL)/*.vhd)
+SRCS =  $(wildcard ../*.vhdl) \
+        $(wildcard ../*.vhd)
 
 ###################################################################
 # Main Targets
