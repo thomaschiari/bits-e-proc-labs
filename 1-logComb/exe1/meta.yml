@@ -1,9 +1,0 @@
-group: extra
-offering: 4
-slug: 1-logcomb-exe1
-studentFile: componente.py
-testFile: test_componente.py
-title: equacao
-topic: 1-logComb
-type: CODE
-url: 1-logComb/exe1

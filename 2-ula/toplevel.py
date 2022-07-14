@@ -1,38 +1,30 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from myhdl import *
-from componentes import *
+from ula_modules import *
+import sys
+
+sys.path.insert(0, "../1-comb/")
+from comb_modules import bin2hex
 
 
 @block
 def toplevel(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5):
     sw = [SW(i) for i in range(10)]
     key = [KEY(i) for i in range(10)]
-    ledr_ = [Signal(bool()) for i in range(10)]
-    hex0_ = [Signal(bool()) for i in range(7)]
-    hex1_ = [Signal(bool()) for i in range(7)]
-    hex2_ = [Signal(bool()) for i in range(7)]
-    hex3_ = [Signal(bool()) for i in range(7)]
-    hex4_ = [Signal(bool()) for i in range(7)]
-    hex5_ = [Signal(bool()) for i in range(7)]
+    ledr_s = [Signal(bool()) for i in range(10)]
+    ledr_bin = ConcatSignal(*reversed(ledr_s))
 
     # --=======================================--
     # INSTANCE
     # --=======================================--
-    ic1 = halfAdder(sw[0], sw[0], ledr_[1], ledr_[0])
+    ic1 = adder(sw[0:4], sw[6:10], ledr_s[0:4], ledr_s[9])
+    ic2 = bin2hex(HEX0, ledr_bin)
 
     @always_comb
     def comb():
-        for i in range(len(ledr_)):
-            LEDR[i].next = ledr_[i]
-
-        for i in range(len(hex0_)):
-            HEX0[i].next = hex0_[i]
-            HEX1[i].next = hex1_[i]
-            HEX2[i].next = hex2_[i]
-            HEX3[i].next = hex3_[i]
-            HEX4[i].next = hex4_[i]
-            HEX5[i].next = hex5_[i]
+        for i in range(len(ledr_s)):
+            LEDR[i].next = ledr_s[i]
 
     return instances()
 
