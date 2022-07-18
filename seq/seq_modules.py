@@ -53,7 +53,7 @@ def blinkLedAdder(led, time_ms, clk, rst):
 @block
 def blinkLed(led, time_ms, clk, rst):
     ms = 50000
-    cnt = Signal(bool(0)[32:])
+    cnt = Signal(intbv(0)[32:])
     l = Signal(bool(0))
 
     @always_seq(clk.posedge, reset=rst)
