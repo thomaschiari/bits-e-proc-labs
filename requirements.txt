@@ -3,7 +3,7 @@ pytest
 pyyaml
 tabulate
 click
-git+https://github.com/insper-education/pytest-devlife
+pytest
 requests
 python-slugify
 unicode
