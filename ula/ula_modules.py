@@ -4,7 +4,6 @@
 
 """
 
-
 from myhdl import *
 
 
@@ -28,12 +27,13 @@ def fullAdder(a, b, c, soma, carry):
 
 @block
 def adder2bits(x, y, soma, carry):
-    pass
     return instances()
 
 
 @block
 def adder(x, y, soma, carry):
-    pass
+    @always_comb
+    def comb():
+        pass
 
     return instances()

@@ -12,7 +12,7 @@ def test_halfAdder():
             a.next = bool(int(t[0]))
             b.next = bool(int(t[1]))
             yield delay(1)
-            print("{} {} {} {}".format(a, b, soma, vaiUm))
+            # print("{} {} {} {}".format(a, b, soma, vaiUm))
             assert soma == (a ^ b)
             assert vaiUm == (a and b)
 
@@ -72,6 +72,7 @@ def test_adder2bits():
 
     dut = adder2bits(x_, y_, s_, carry)
     sim = Simulation(dut, stimulus)
+    traceSignals(dut)
     sim.run()
 
 
@@ -100,5 +101,28 @@ def test_adder():
     carry = Signal(bool(0))
 
     dut = adder(x_, y_, s_, carry)
+    sim = Simulation(dut, stimulus)
+    sim.run()
+
+
+def test_bin2bcd():
+    @instance
+    def stimulus():
+        print(h)
+        print(m)
+        print(l)
+        yield delay(10)
+        din.next = 13
+        yield delay(10)
+        print(h)
+        print(m)
+        print(l)
+
+    din = Signal(intbv(7)[8:])
+    h = Signal(intbv(0)[4:])
+    m = Signal(intbv(0)[4:])
+    l = Signal(intbv(0)[4:])
+    dut = bin2bcd(h, m, l, din)
+    traceSignals(dut)
     sim = Simulation(dut, stimulus)
     sim.run()
