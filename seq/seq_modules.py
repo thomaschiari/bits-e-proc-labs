@@ -19,85 +19,41 @@ def dff(q, d, clk, rst):
 
 
 @block
-def blinkLedAdder(led, time_ms, clk, rst):
-    ms = 50000
+def blinkLedAdder(led, clk, rst):
     x = [Signal(bool(0)) for i in range(32)]
     y = [Signal(bool(0)) for i in range(32)]
     s = [Signal(bool(0)) for i in range(32)]
     c = Signal(bool(0))
-    l = Signal(bool(0))
+    status = Signal(bool(0))
 
-    bit = round(math.log2(ms * time_ms))
-
+    y[0] = 1
     adder_1 = adder(x, y, s, c)
 
     @always_seq(clk.posedge, reset=rst)
     def seq():
-        if s[bit] == 0:
+        if x[24] == 0 and x[23] == 0:
             for i in range(len(x)):
                 x[i].next = s[i]
-            y[0].next = 1
+            status.next = status
         else:
             for i in range(len(x)):
                 x[i].next = 0
-                y[0].next = 0
-            l.next = not l
+            status.next = not status
 
     @always_comb
     def comb():
-        led.next = l
+        led.next = status
 
     return instances()
 
 
 @block
-def blinkLed(led, time_ms, clk, rst):
-    ms = 50000
-    cnt = Signal(intbv(0)[32:])
-    l = Signal(bool(0))
-
-    @always_seq(clk.posedge, reset=rst)
-    def seq():
-        if cnt < ms * time_ms:
-            cnt.next = cnt + 1
-        else:
-            cnt.next = 0
-            l.next = not l
-
-    @always_comb
-    def comb():
-        led.next = l
-
+def blinkLed(led, clk, rst):
+    pass
     return instances()
 
 
 @block
-def stepMotor(phases, dir, vel, clk, rst):
-    cnt = Signal(intbv(0)[32:])
-    top = Signal(intbv(0)[32:])
-    activated = Signal(intbv(0)[4:])
-
-    @always_seq(clk.posedge, reset=rst)
-    def seq():
-        if cnt <= top:
-            cnt.next = cnt + 1
-        else:
-            cnt.next = 0
-            if activated < 3:
-                activated.next = activated + 1
-            else:
-                activated.next = 0
-
-    @always_comb
-    def comb():
-        if vel:
-            top.next = 5000000
-        else:
-            top.next = 2500000
-
-        if dir:
-            phases.next = intbv(1)[4:] << activated
-        else:
-            phases.next = intbv(8)[4:] >> activated
-
+def barLed(leds, time_ms, dir, vel, clk, rst):
+    pass
     return instances()
