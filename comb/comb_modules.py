@@ -18,7 +18,7 @@ def exe1(q, a, b):
 
     @always_comb
     def comb():
-        q.next = a or not b
+        q.next = a
 
     return instances()
 
@@ -44,7 +44,7 @@ def exe2(q, a, b, c):
 
     @always_comb
     def comb():
-        q.next = (b and c) or (not b and not c)
+        q.next = a
 
     return instances()
 
@@ -72,7 +72,7 @@ def exe3(q, a, b, c, d, e):
 
     @always_comb
     def comb():
-        q.next = (a or b) and c and d and e
+        q.next = a
 
     return instances()
 
@@ -98,12 +98,7 @@ def exe5(leds, sw):
 
     @always_comb
     def comb():
-        leds[0].next = sw[0]
-        leds[1].next = sw[0] & sw[1]
-        leds[2].next = not sw[0]
-        leds[3].next = sw[0] ^ sw[1]
-        for i in range(4, 10):
-            leds[i].next = 1
+        pass
 
     return instances()
 
@@ -112,8 +107,7 @@ def exe5(leds, sw):
 def sw2hex(hex0, sw):
     @always_comb
     def comb():
-        for i in range(len(hex0)):
-            hex0[i].next = sw[i]
+        pass
 
     return instances()
 
@@ -125,66 +119,34 @@ def bin2hex(hex0, sw):
         if sw[4:0] == 0:
             hex0.next = "1000000"
         elif sw[4:0] == 1:
-            hex0.next = "1111001"
+            hex0.next = "1000000"
         elif sw[4:0] == 2:
-            hex0.next = "0100100"
+            hex0.next = "1000000"
         elif sw[4:0] == 3:
-            hex0.next = "0110000"
+            hex0.next = "1000000"
         elif sw[4:0] == 4:
-            hex0.next = "0011001"
+            hex0.next = "1000000"
         elif sw[4:0] == 5:
-            hex0.next = "0010010"
+            hex0.next = "1000000"
         elif sw[4:0] == 6:
-            hex0.next = "0000010"
+            hex0.next = "1000000"
         elif sw[4:0] == 7:
-            hex0.next = "1111000"
+            hex0.next = "1000000"
         elif sw[4:0] == 8:
-            hex0.next = "0000000"
+            hex0.next = "1000000"
         elif sw[4:0] == 9:
-            hex0.next = "0011000"
+            hex0.next = "1000000"
         elif sw[4:0] == 10:
-            hex0.next = "0001000"
+            hex0.next = "1000000"
         elif sw[4:0] == 11:
-            hex0.next = "0000011"
+            hex0.next = "1000000"
         elif sw[4:0] == 12:
-            hex0.next = "1000110"
+            hex0.next = "1000000"
         elif sw[4:0] == 13:
-            hex0.next = "0100001"
+            hex0.next = "1000000"
         elif sw[4:0] == 14:
-            hex0.next = "0000110"
+            hex0.next = "1000000"
         else:
-            hex0.next = "0001110"
-
-    return instances()
-
-
-@block
-def bin2bcd(dig2, dig1, dig0, sw):
-    @always_comb
-    def comb():
-        h2 = Signal(modbv(0)[4:])
-        h1 = Signal(modbv(0)[4:])
-        h0 = Signal(modbv(0)[4:])
-
-        for i in range(7):
-            if h2 >= 5:
-                h2.next = h2 + 3
-            if h1 >= 5:
-                h1.next = h1 + 3
-            if h0 >= 5:
-                h0.next = h0 + 3
-
-            h2.next = h2 << 1
-            h2[0].next = h1[3]
-
-            h1.next = h1 << 1
-            h1[0].next = h0[3]
-
-            h0.next = h0 << 1
-            h0[0].next = sw[i]
-
-        dig2.next = h2
-        dig1.next = h1
-        dig0.next = h0
+            hex0.next = "1000000"
 
     return instances()
