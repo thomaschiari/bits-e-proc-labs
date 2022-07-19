@@ -69,3 +69,35 @@ def blinkLed(led, time_ms, clk, rst):
         led.next = l
 
     return instances()
+
+
+@block
+def stepMotor(phases, dir, vel, clk, rst):
+    cnt = Signal(intbv(0)[32:])
+    top = Signal(intbv(0)[32:])
+    activated = Signal(intbv(0)[4:])
+
+    @always_seq(clk.posedge, reset=rst)
+    def seq():
+        if cnt <= top:
+            cnt.next = cnt + 1
+        else:
+            cnt.next = 0
+            if activated < 3:
+                activated.next = activated + 1
+            else:
+                activated.next = 0
+
+    @always_comb
+    def comb():
+        if vel:
+            top.next = 5000000
+        else:
+            top.next = 2500000
+
+        if dir:
+            phases.next = intbv(1)[4:] << activated
+        else:
+            phases.next = intbv(8)[4:] >> activated
+
+    return instances()

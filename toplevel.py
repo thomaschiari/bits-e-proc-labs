@@ -31,9 +31,11 @@ def toplevel(LEDR, SW, KEY, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, CLOCK_50, RESET_
     # ---------------------------------------- #
     # seq
     # ---------------------------------------- #
-    ic1 = blinkLed(ledr_s[0], 100, CLOCK_50, RESET_N)
-    ic2 = blinkLed(ledr_s[1], 50, CLOCK_50, RESET_N)
-    ic3 = blinkLed(ledr_s[2], 1000, CLOCK_50, RESET_N)
+    ic0 = dff(ledr_s[0], sw_s[0], key_s[0], RESET_N)
+    # ic1 = blinkLed(ledr_s[0], 100, CLOCK_50, RESET_N)
+    # ic2 = blinkLed(ledr_s[1], 50, CLOCK_50, RESET_N)
+    # ic3 = blinkLed(ledr_s[2], 1000, CLOCK_50, RESET_N)
+    # ic1 = stepMotor(LEDR, sw_s[0], sw_s[1], CLOCK_50, RESET_N)
 
     # ---------------------------------------- #
     @always_comb
