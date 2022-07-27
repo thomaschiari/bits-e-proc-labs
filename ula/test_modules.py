@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from myhdl import *
-from ula_modules import *
+from .ula_modules import *
 
 
 def test_halfAdder():
