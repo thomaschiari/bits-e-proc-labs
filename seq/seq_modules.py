@@ -19,37 +19,22 @@ def dff(q, d, clk, rst):
 
 
 @block
-def blinkLedAdder(led, clk, rst):
-    x = [Signal(bool(0)) for i in range(32)]
-    y = [Signal(bool(0)) for i in range(32)]
-    s = [Signal(bool(0)) for i in range(32)]
-    c = Signal(bool(0))
-    status = Signal(bool(0))
-
-    y[0] = 1
-    adder_1 = adder(x, y, s, c)
+def blinkLed(led, clk, rst):
+    cnt = Signal(intbv(0)[32:])
+    l = Signal(bool(0))
 
     @always_seq(clk.posedge, reset=rst)
     def seq():
-        if x[24] == 0 and x[23] == 0:
-            for i in range(len(x)):
-                x[i].next = s[i]
-            status.next = status
+        if cnt < 25000000:
+            cnt.next = cnt + 1
         else:
-            for i in range(len(x)):
-                x[i].next = 0
-            status.next = not status
+            cnt.next = 0
+            l.next = not l
 
     @always_comb
     def comb():
-        led.next = status
+        led.next = l
 
-    return instances()
-
-
-@block
-def blinkLed(led, clk, rst):
-    pass
     return instances()
 
 
