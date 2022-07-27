@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from myhdl import *
-from comb_modules import *
+from .comb_modules import *
 
 
 def test_exe1():
@@ -42,7 +42,7 @@ def test_exe2():
             b.next = bool(int(t[1]))
             c.next = bool(int(t[2]))
             yield delay(1)
-            assert q == bool(int(t[3]))
+            assert q == bool(int(t[3])), f"Entrada: {t[0:3]}\tSaída esperada: {t[3]}\tObtido: {int(q)}"
 
     q = Signal(bool(0))
     a = Signal(bool(0))
