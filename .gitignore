@@ -2,5 +2,7 @@
 *.egg
 build
 htmlcov
-toplevel.vhd
-env/
+*.vcd
+*.vhd
+*.v
+.direnv/
