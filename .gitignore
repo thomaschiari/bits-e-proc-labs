@@ -6,5 +6,5 @@ htmlcov
 *.vhd
 *.v
 .direnv/
-.env/
+.env
 *.ini
