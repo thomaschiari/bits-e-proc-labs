@@ -2,6 +2,7 @@
 
 from myhdl import *
 from .comb_modules import *
+import telemetry
 
 
 def test_exe1():
@@ -42,7 +43,9 @@ def test_exe2():
             b.next = bool(int(t[1]))
             c.next = bool(int(t[2]))
             yield delay(1)
-            assert q == bool(int(t[3])), f"Entrada: {t[0:3]}\tSaída esperada: {t[3]}\tObtido: {int(q)}"
+            assert q == bool(
+                int(t[3])
+            ), f"Entrada: {t[0:3]}\tSaída esperada: {t[3]}\tObtido: {int(q)}"
 
     q = Signal(bool(0))
     a = Signal(bool(0))
@@ -73,23 +76,5 @@ def test_exe3():
     d = Signal(bool(0))
     e = Signal(bool(0))
     dut = exe3(q, a, b, c, d, e)
-    sim = Simulation(dut, stimulus)
-    sim.run()
-
-
-def test_bin2bcd():
-    @instance
-    def stimulus():
-        yield delay(1)
-        print(bin(h2, 2))
-        print(bin(h1, 2))
-        print(bin(h0, 2))
-
-    sw = Signal(modbv(162)[8:])
-    h2 = Signal(modbv(0)[4:])
-    h1 = Signal(modbv(0)[4:])
-    h0 = Signal(modbv(0)[4:])
-
-    dut = bin2bcd(h2, h1, h0, sw)
     sim = Simulation(dut, stimulus)
     sim.run()

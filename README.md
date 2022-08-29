@@ -1,28 +1,21 @@
-## Configurando python
+## Configurando infra lab
 
-``` bash                           
-python3.8 -m venv env           
-. env/bin/activate              
+Instalar:
+
+- Quartus 21 lite
+- Configurar `.bashrc`: `export PATH=$PATH:/home/vann/intelFPGA_lite/21.1/quartus/bin/`
+- Instalar: `python3.8-venv python3-wheel`
+
+Python:
+
+```bash
+python3.8 -m venv env
+. env/bin/activate
 pip3 install -r requirements.txt
-```                             
+```
 
 Ativando virtual env:
 
-``` bash
+```bash
 . env/bin/activate
-```
-
-## Configurando seu plugin
-
-É feito um acompanhamento do progresso nos labs via um plugin do pytest. Para configurá-lo você deverá adicionar essas linhas no fim do arquivo `~/.bashrc`.
-
-``` bash
-export AUTH_TOKEN=(token recebido por email)
-export AUTH_HOSTNAME=https://devlife.insper-comp.com.br
-```
-
-Além disso, você precisa ter o quartus 21.1 light instalado e configurado no `bashrc`:
-
-``` bash
-export PATH=$PATH:$HOME/intelFPGA_lite/21.1/quartus/bin/
 ```
