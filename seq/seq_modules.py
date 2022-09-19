@@ -21,12 +21,9 @@ def dff(q, d, clk, rst):
 @block
 def contador(leds, clk, rst):
 
-    tmp = Signal(modbv(0)[10:])
-
     @always_seq(clk.posedge, reset=rst)
     def seq():
-        tmp.next = tmp + 1
-        leds.next = tmp
+        pass
 
     return instances()
 
