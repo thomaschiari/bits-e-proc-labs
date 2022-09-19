@@ -19,6 +19,19 @@ def dff(q, d, clk, rst):
 
 
 @block
+def contador(leds, clk, rst):
+
+    tmp = Signal(modbv(0)[10:])
+
+    @always_seq(clk.posedge, reset=rst)
+    def seq():
+        tmp.next = tmp + 1
+        leds.next = tmp
+
+    return instances()
+
+
+@block
 def blinkLed(led, clk, rst):
     cnt = Signal(intbv(0)[32:])
     l = Signal(bool(0))
@@ -39,6 +52,18 @@ def blinkLed(led, clk, rst):
 
 
 @block
-def barLed(leds, time_ms, dir, vel, clk, rst):
-    pass
+def barLed(leds, clk, rst):
+    @always_seq(clk.posedge, reset=rst)
+    def seq():
+        pass
+
+    return instances()
+
+
+@block
+def barLed2(leds, clk, rst):
+    @always_seq(clk.posedge, reset=rst)
+    def seq():
+        pass
+
     return instances()
